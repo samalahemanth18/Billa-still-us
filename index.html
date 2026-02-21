@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For You 💛</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background: linear-gradient(135deg,#ff758c,#ff7eb3);
+    overflow-x: hidden;
+    color: white;
+    text-align: center;
+}
+
+.section {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 30px;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 1s ease;
+}
+
+.section.active {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+h1 {
+    font-size: 38px;
+}
+
+p {
+    font-size: 20px;
+    max-width: 600px;
+    line-height: 1.6;
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: white;
+    color: #ff4b6e;
+    font-weight: bold;
+    margin-top: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.1);
+}
+
+.heart {
+    position: fixed;
+    bottom: -10px;
+    font-size: 20px;
+    animation: float 8s linear infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-100vh); opacity: 0; }
+}
+
+.name {
+    font-size: 45px;
+    font-weight: bold;
+    color: #fff;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px white; }
+    to { text-shadow: 0 0 25px yellow; }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<div class="section active">
+    <h1>Hey You 💐</h1>
+    <p id="typing"></p>
+    <button onclick="startExperience()">Tap Here</button>
+</div>
+
+<div class="section">
+    <h1>About Yesterday 🌙</h1>
+    <p>You sent me a bouquet... and that meant something.</p>
+</div>
+
+<div class="section">
+    <h1>11:49 PM</h1>
+    <p>Maybe it was just a short chat.  
+    Maybe it was just sleep.  
+    Maybe I just overthink because I care.</p>
+</div>
+
+<div class="section">
+    <div class="name">Premanvitha 💛</div>
+    <p>No matter what changes…  
+    I still value us.</p>
+</div>
+
+<div class="section">
+    <h1>Hemuuu 😭</h1>
+    <p>If you're reading this…  
+    just know I'm not here to pressure you.  
+    I'm here because I care.</p>
+</div>
+
+<script>
+const text = "I miss our late night talks… but more than that, I value you.";
+let i = 0;
+function typeEffect() {
+    if (i < text.length) {
+        document.getElementById("typing").innerHTML += text.charAt(i);
+        i++;
+        setTimeout(typeEffect, 50);
+    }
+}
+typeEffect();
+
+function startExperience() {
+    document.getElementById("bgMusic").play();
+}
+
+const sections = document.querySelectorAll(".section");
+
+window.addEventListener("scroll", () => {
+    sections.forEach(section => {
+        const position = section.getBoundingClientRect().top;
+        if (position < window.innerHeight - 100) {
+            section.classList.add("active");
+        }
+    });
+});
+
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💛";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 8000);
+}, 800);
+</script>
+
+</body>
+</html>
